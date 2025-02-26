@@ -8,4 +8,6 @@ class File:
         self.taille = 
         self.hexa = 
         self.date =
-        self.signature = 
+        self.signature =
+
+
