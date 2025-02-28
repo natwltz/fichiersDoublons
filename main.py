@@ -89,3 +89,8 @@ def sommes_repertoire(directory):
                 sums['autre'] += file_obj.size
     
     return sums
+
+def print_sums(sums):
+    """Affiche la taille des fichiers par catégorie."""
+    for category, total_size in sums.items():
+        print(f"Total {category}: {total_size} octets")
