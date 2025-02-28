@@ -53,3 +53,10 @@ def analyse_repertoire(directory):
     
     duplicates = {signature: files for signature, files in files_dict.items() if len(files) > 1}
     return duplicates
+
+def print_doublons(duplicates):
+    """Affiche les fichiers en doublon."""
+    for signature, files in duplicates.items():
+        print(f"Doublons trouvés pour la signature {signature}:")
+        for file in files:
+            print(f"  - {file.path}")
