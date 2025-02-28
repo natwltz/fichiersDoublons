@@ -92,3 +92,28 @@ def print_sums(sums):
     """Affiche la taille des fichiers par catégorie."""
     for category, total_size in sums.items():
         print(f"Total {category}: {total_size} octets")
+
+# 3) Comparaison de deux répertoires (identification des doublons dans rep2)
+def compare_directories(dir1, dir2):
+    """Compare deux répertoires et identifie les doublons dans rep2."""
+    files_dir1 = {}
+    for root, _, files in os.walk(dir1):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            files_dir1[file_obj.signature] = file_obj
+    
+    duplicates = []
+    for root, _, files in os.walk(dir2):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            if file_obj.signature in files_dir1:
+                duplicates.append(file_obj)
+    
+    return duplicates
+
+def print_comparison(duplicates):
+    """Affiche les fichiers en doublon dans rep2."""
+    for file in duplicates:
+        print(f"Doublon trouvé dans rep2: {file.path}")
