@@ -119,3 +119,10 @@ def print_comparison(duplicates):
     """Affiche les fichiers en doublon dans rep2."""
     for file in duplicates:
         print(f"Doublon trouvé dans rep2: {file.path}")
+
+    # 4) Suppression des doublons dans rep2
+def suppresion_doublons(duplicates):
+    """Supprime les fichiers en doublon dans rep2."""
+    for file in duplicates:
+        print(f"Suppression de {file.path}")
+        os.remove(file.path)
