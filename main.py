@@ -130,8 +130,9 @@ def suppresion_doublons(duplicates):
         while flag == True:
             if supprimer == "o":
                 print(f"{file.path} supprimer")
+                os.remove(file.path)
                 flag = True
-            elif supprimer == "n":
+            if supprimer == "n":
                 print("Fichier non supprimer")
                 flag = True
             else:
