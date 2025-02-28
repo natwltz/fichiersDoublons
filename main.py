@@ -127,7 +127,7 @@ def suppresion_doublons(duplicates):
         print(f"Voulez-vous supprimer {file.path} ?")
         supprimer = input("o = oui / n = non")
         flag = False
-        while flag:
+        while flag == True:
             if supprimer == "o":
                 print(f"{file.path} supprimer")
                 flag = True
