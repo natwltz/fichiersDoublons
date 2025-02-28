@@ -24,3 +24,8 @@ class File:
         with open(self.path, "rb") as f:
             premiers_octets = f.read(num_bytes)
             return ''.join(f'{octet:02x}' for octet in premiers_octets)
+
+    def afficher_date_modification(self):
+        """Récupère la date de modification du fichier."""
+        temps_modification = os.path.getmtime(self.path)
+        return time.ctime(temps_modification)
