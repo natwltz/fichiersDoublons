@@ -53,3 +53,42 @@ def print_duplicates(duplicates):
         print(f"Doublons trouvés pour la signature {signature}:")
         for file in files:
             print(f"  - {file.path}")
+
+# 2) Somme d'un répertoire (taille des fichiers par catégorie)
+
+# On définit des catégories de fichiers (texte, image, vidéo, audio...).
+# On scanne tous les fichiers du dossier et on ajoute leur taille à la bonne catégorie.
+# Si un fichier ne rentre dans aucune catégorie, il est classé dans "autre".
+
+def sum_directory(directory):
+    """Calcule la taille des fichiers par catégorie."""
+    categories = {
+        'texte': ['txt', 'doc', 'docx', 'odt', 'csv', 'xls', 'ppt', 'odp'],
+        'images': ['jpg', 'png', 'bmp', 'gif', 'svg'],
+        'video': ['mp4', 'avi', 'mov', 'mpeg', 'wmv'],
+        'audio': ['mp3', 'mp2', 'wav', 'bwf'],
+        'autre': []
+    }
+    
+    sums = {category: 0 for category in categories}
+    
+    for root, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            ext = file.split('.')[-1].lower()
+            found = False
+            for category, exts in categories.items():
+                if ext in exts:
+                    sums[category] += file_obj.size
+                    found = True
+                    break
+            if not found:
+                sums['autre'] += file_obj.size
+    
+    return sums
+
+def print_sums(sums):
+    """Affiche la taille des fichiers par catégorie."""
+    for category, total_size in sums.items():
+        print(f"Total {category}: {total_size} octets")
