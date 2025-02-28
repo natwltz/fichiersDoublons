@@ -114,3 +114,8 @@ def comparaison_repertoire(dir1, dir2):
                 duplicates.append(file_obj)
     
     return duplicates
+
+def print_comparison(duplicates):
+    """Affiche les fichiers en doublon dans rep2."""
+    for file in duplicates:
+        print(f"Doublon trouvé dans rep2: {file.path}")
