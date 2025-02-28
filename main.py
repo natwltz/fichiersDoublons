@@ -125,3 +125,28 @@ def delete_duplicates(duplicates):
     for file in duplicates:
         print(f"Suppression de {file.path}")
         os.remove(file.path)
+
+# 5) Rapatriement des fichiers de rep2 vers rep1
+# Si un fichier dans rep2 n'existe pas encore dans rep1, on le déplace !
+
+def repatriate_files(dir1, dir2):
+    """Déplace les nouveaux fichiers de rep2 vers rep1."""
+    files_dir1 = {}
+    for root, _, files in os.walk(dir1):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            files_dir1[file_obj.signature] = file_obj
+    
+    for root, _, files in os.walk(dir2):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            if file_obj.signature not in files_dir1:
+                new_path = os.path.join(dir1, file)
+                if os.path.exists(new_path):
+                    if file_obj.date > files_dir1[file_obj.signature].date:
+                        os.replace(file_path, new_path)
+                else:
+                    os.rename(file_path, new_path)
+                print(f"Rapatriement de {file_path} vers {new_path}")
