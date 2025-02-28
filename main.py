@@ -124,8 +124,18 @@ def print_comparison(duplicates):
 def suppresion_doublons(duplicates):
     """Supprime les fichiers en doublon dans rep2."""
     for file in duplicates:
-        print(f"Suppression de {file.path}")
-        os.remove(file.path)
+        print(f"Voulez-vous supprimer {file.path} ?")
+        supprimer = input("o = oui / n = non")
+        flag = False
+        while flag:
+            if supprimer == "o":
+                print(f"{file.path} supprimer")
+                flag = True
+            elif supprimer == "n":
+                print("Fichier non supprimer")
+                flag = True
+            else:
+                print("Veillez entrez o ou n")
 
 # 5) Rapatriement des fichiers de rep2 vers rep1
 def repatrimant_fichier(dir1, dir2):
