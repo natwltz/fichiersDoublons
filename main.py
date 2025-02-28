@@ -33,3 +33,8 @@ class File:
     def comparaisons(self, other):
         """Compare deux fichiers par leur signature MD5 et leur taille."""
         return self.signature == other.signature and self.size == other.size
+
+    
+    def representation(self):
+        """Représentation lisible de l'objet File."""
+        return f"File(name={self.name}, size={self.size}, date={self.date}, signature={self.signature})"
