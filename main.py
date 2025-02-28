@@ -9,3 +9,5 @@ class File:
         self.hexa = 
         self.date =
         self.signature = 
+
+def structure (path):
