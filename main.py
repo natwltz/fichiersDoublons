@@ -29,3 +29,7 @@ class File:
         """Récupère la date de modification du fichier."""
         temps_modification = os.path.getmtime(self.path)
         return time.ctime(temps_modification)
+
+    def comparaisons(self, other):
+        """Compare deux fichiers par leur signature MD5 et leur taille."""
+        return self.signature == other.signature and self.size == other.size
