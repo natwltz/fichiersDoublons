@@ -39,7 +39,7 @@ class File:
         """Représentation lisible de l'objet File."""
         return f"File(name={self.name}, size={self.size}, date={self.date}, signature={self.signature})"
 
-    # 1) Analyse d'un répertoire (détection des doublons)
+# 1) Analyse d'un répertoire (détection des doublons)
 def analyse_repertoire(directory):
     """Analyse un répertoire et détecte les fichiers en doublon."""
     files_dict = {}
@@ -60,3 +60,32 @@ def print_doublons(duplicates):
         print(f"Doublons trouvés pour la signature {signature}:")
         for file in files:
             print(f"  - {file.path}")
+
+# 2) Somme d'un répertoire (taille des fichiers par catégorie)
+def sommes_repertoire(directory):
+    """Calcule la taille des fichiers par catégorie."""
+    categories = {
+        'texte': ['txt', 'doc', 'docx', 'odt', 'csv', 'xls', 'ppt', 'odp'],
+        'images': ['jpg', 'png', 'bmp', 'gif', 'svg'],
+        'video': ['mp4', 'avi', 'mov', 'mpeg', 'wmv'],
+        'audio': ['mp3', 'mp2', 'wav', 'bwf'],
+        'autre': []
+    }
+    
+    sums = {category: 0 for category in categories}
+    
+    for root, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            ext = file.split('.')[-1].lower()
+            found = False
+            for category, exts in categories.items():
+                if ext in exts:
+                    sums[category] += file_obj.size
+                    found = True
+                    break
+            if not found:
+                sums['autre'] += file_obj.size
+    
+    return sums
