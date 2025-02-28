@@ -38,3 +38,18 @@ class File:
     def representation(self):
         """Représentation lisible de l'objet File."""
         return f"File(name={self.name}, size={self.size}, date={self.date}, signature={self.signature})"
+
+    # 1) Analyse d'un répertoire (détection des doublons)
+def analyse_repertoire(directory):
+    """Analyse un répertoire et détecte les fichiers en doublon."""
+    files_dict = {}
+    for root, _, files in os.walk(directory):
+        for file in files:
+            file_path = os.path.join(root, file)
+            file_obj = File(file_path)
+            if file_obj.signature not in files_dict:
+                files_dict[file_obj.signature] = []
+            files_dict[file_obj.signature].append(file_obj)
+    
+    duplicates = {signature: files for signature, files in files_dict.items() if len(files) > 1}
+    return duplicates
