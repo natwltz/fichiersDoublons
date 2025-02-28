@@ -19,3 +19,8 @@ class File:
                 hash_md5.update(chunk)
             return hash_md5.hexdigest()
 
+    def octets_vers_chaine_hex(self, num_bytes=5):
+        """Lit les 5 premiers octets du fichier et les convertit en hexadécimal."""
+        with open(self.path, "rb") as f:
+            premiers_octets = f.read(num_bytes)
+            return ''.join(f'{octet:02x}' for octet in premiers_octets)
