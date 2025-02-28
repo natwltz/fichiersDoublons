@@ -3,12 +3,13 @@ import hashlib
 import time
 
 class File:
-    def __init__(self, chemin):
-        self.chemin = chemin
-        self.taille = 
-        self.hexa = 
-        self.date =
-        self.signature =
+    def __init__(self, path):
+        self.path = path
+        self.name = os.path.basename(path)
+        self.size = os.path.getsize(path)
+        self.date = time.ctime(os.path.getmtime(path))
+        self.signature = self.calculate_md5()
+        self.first_bytes = self.get_first_bytes()
 
 
 
