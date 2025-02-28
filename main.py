@@ -150,3 +150,28 @@ def repatriate_files(dir1, dir2):
                 else:
                     os.rename(file_path, new_path)
                 print(f"Rapatriement de {file_path} vers {new_path}")
+
+# Exemple d'utilisation
+# modifie le directory, rep1 et rep2 car ce sont mes fichiers de test
+if __name__ == "__main__":
+    directory = "D:\\COURS\\python\\FICHIER\\DOUBLONS\\test"
+    rep1 = "D:\\COURS\\python\\FICHIER DOUBLONS\\test\\rep1"
+    rep2 = "D:\\COURS\\python\\FICHIER DOUBLONS\\test\\rep2"  
+
+    # 1) Analyse des doublons dans un répertoire
+    duplicates = analyze_directory(directory)
+    print_duplicates(duplicates)
+
+    # 2) Somme des fichiers par catégorie
+    sums = sum_directory(directory)
+    print_sums(sums)
+
+    # 3) Comparaison de deux répertoires
+    duplicates = compare_directories(rep1, rep2)
+    print_comparison(duplicates)
+
+    # 4) Suppression des doublons dans rep2
+    delete_duplicates(duplicates)
+
+    # 5) Rapatriement des fichiers de rep2 vers rep1
+    repatriate_files(rep1, rep2)
